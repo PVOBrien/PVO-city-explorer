@@ -1,0 +1,31 @@
+{
+  "name": "pvo-city-explorer",
+  "version": "1.0.0",
+  "description": "wiring up json via WRRC backend requests",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PVOBrien/PVO-city-explorer.git"
+  },
+  "keywords": [
+    "code",
+    "fellows",
+    "lab",
+    "WRRC",
+    "json"
+  ],
+  "author": "Paul V O'Brien",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PVOBrien/PVO-city-explorer/issues"
+  },
+  "homepage": "https://github.com/PVOBrien/PVO-city-explorer#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
+}
