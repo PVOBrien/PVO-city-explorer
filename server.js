@@ -41,21 +41,28 @@ app.get('/location', (request, response) => {
 app.get('/weather', (request, response) => {
   try{
     console.log(request.query.weather); // TODO: what is query???
-    let weather = request.query.weather;
+    // let weather = request.query.weather; // TODO: This is "dummy" data. It's just pulling whatever,
     let weatherData = require('./data/weather.json');
     let weatherDayArray = [];
-    const obj = new WeatherReport(weather, weatherData);
+    // BELOW: ARROW NOTATION to iterate over the data[] items.
 
-    response.send(obj);
+    weatherData.data.forEach(day => {
+      weatherDayArray.push(new WeatherReport(day));
+    });
+
+    // const obj = new WeatherReport(weatherData); // old school single item invocation
+    // weatherDayArray.push(obj); // single item invocation push into weatherDayArray
+
+    response.status(200).send(weatherDayArray);
 
   } catch(error) {
     console.log('Error', error);
     response.status(500).send('if it broke, I guess I\'ll fix it?');
   }
 
-  function WeatherReport(weather, weatherData){ // TODO: do you need "weather" parameter?
-    this.forecast = weatherData.data[0].weather.description;
-    this.time = weatherData.data[0].datetime;
+  function WeatherReport(weatherData){
+    this.forecast = weatherData.weather.description;
+    this.time = weatherData.datetime;
   }
 });
 
