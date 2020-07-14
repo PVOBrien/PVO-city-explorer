@@ -44,7 +44,7 @@ app.get('/weather', (request, response) => {
     // let weather = request.query.weather;
     let weatherData = require('./data/weather.json');
     let weatherDayArray = [];
-    const obj = new WeatherReport(weather, weatherData);
+    const obj = new WeatherReport(weatherData);
     weatherDayArray.push(obj);
 
     response.send(weatherDayArray);
@@ -54,7 +54,7 @@ app.get('/weather', (request, response) => {
     response.status(500).send('if it broke, I guess I\'ll fix it?');
   }
 
-  function WeatherReport(weather, weatherData){ // TODO: do you need "weather" parameter?
+  function WeatherReport(weatherData){ // TODO: do you need "weather" parameter?
     this.forecast = weatherData.data[0].weather.description;
     this.time = weatherData.data[0].datetime;
   }
