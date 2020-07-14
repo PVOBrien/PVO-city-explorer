@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const cors = require('cors');
+const { request } = require('express');
 app.use(cors());
 
 app.use(express.static('./public')); // TODO: Remember the . DOT! otherwise it's looking for a file not a path to folder.
@@ -16,7 +17,7 @@ app.listen(PORT, () => {
 
 app.get('/location', (request, response) => {
   try{
-    console.log(request.query.city);
+    // console.log(request.query.city);
     let city = request.query.city;
     let geoData = require('./data/location.json');
 
@@ -35,5 +36,29 @@ app.get('/location', (request, response) => {
     this.latitude = geoData[0].lat;
     this.longitude = geoData[0].lon;
   }
-
 });
+
+app.get('/weather', (request, response) => {
+  try{
+    console.log(request.query.weather); // TODO: what is query???
+    let weather = request.query.weather;
+    let weatherData = require('./data/weather.json');
+    let weatherDayArray = [];
+    const obj = new WeatherReport(weather, weatherData);
+
+    response.send(obj);
+
+  } catch(error) {
+    console.log('Error', error);
+    response.status(500).send('if it broke, I guess I\'ll fix it?');
+  }
+
+  function WeatherReport(weather, weatherData){ // TODO: do you need "weather" parameter?
+    this.forecast = weatherData.data[0].weather.description;
+    this.time = weatherData.data[0].datetime;
+  }
+});
+
+app.get('*', (request, response) => {
+  response.status(404).send('Page not Found. -p');
+}); //Always include these for a cleaner look.
