@@ -61,8 +61,8 @@ app.get('/weather', (request, response) => {
   }
 
   function WeatherReport(weatherData){
-    this.forecast = weatherData.data[0].weather.description;
-    this.time = weatherData.data[0].datetime;
+    this.forecast = day.weather.description;
+    this.time = day.datetime;
   }
 });
 
