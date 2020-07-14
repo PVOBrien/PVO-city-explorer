@@ -16,16 +16,18 @@ app.listen(PORT, () => {
 });
 
 app.get('/location', (request, response) => {
+
   try{
     // console.log(request.query.city);
     let city = request.query.city;
     let geoData = require('./data/location.json');
 
-    const obj = new Location(city, geoData);
+    const obj = new Location(city, geoData); // city is the data that came in from the form. geodata is "dummy" data atm from the supplied json file.
 
-    response.send(obj);
+    response.send(obj); // sending it back
 
-  } catch(error){
+  } catch(error){ //Err catch.
+
     console.log('Error', error);
     response.status(500).send('we made a boo-boo! sori!');
   }
@@ -40,7 +42,7 @@ app.get('/location', (request, response) => {
 
 app.get('/weather', (request, response) => {
   try{
-    console.log(request.query.weather); // TODO: what is query???
+    // console.log(request.query.weather); // TODO: what is query???
     // let weather = request.query.weather; // TODO: This is "dummy" data. It's just pulling whatever,
     let weatherData = require('./data/weather.json');
     let weatherDayArray = [];
