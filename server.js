@@ -41,12 +41,13 @@ app.get('/location', (request, response) => {
 app.get('/weather', (request, response) => {
   try{
     console.log(request.query.weather); // TODO: what is query???
-    let weather = request.query.weather;
+    // let weather = request.query.weather;
     let weatherData = require('./data/weather.json');
     let weatherDayArray = [];
     const obj = new WeatherReport(weather, weatherData);
+    weatherDayArray.push(obj);
 
-    response.send(obj);
+    response.send(weatherDayArray);
 
   } catch(error) {
     console.log('Error', error);
